@@ -3,81 +3,115 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Makiro Sushi — Cardápio</title>
+<title>Makiro Sushi — Delivery</title>
 <style>
   :root{
     --bg:#0d0d0f; --card:#16161b; --line:#26262f;
     --txt:#f5f5f7; --muted:#9a9aa6;
-    --brand:#e11d48; --brand2:#fb7185; --gold:#f5c451;
+    --brand:#e11d48; --brand-d:#be123c; --brand2:#fb7185;
+    --gold:#f5c451; --wa:#25d366; --wa-d:#1da851;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;padding-bottom:96px}
   img{display:block;max-width:100%}
 
-  /* topo */
-  .hero{text-align:center;padding:34px 16px 22px;background:
-      radial-gradient(120% 90% at 50% 0%, rgba(225,29,72,.22), transparent 60%);
-      border-bottom:1px solid var(--line)}
-  .hero .logo{width:74px;height:74px;border-radius:20px;background:var(--brand);
-      display:grid;place-items:center;font-size:38px;margin:0 auto 12px;box-shadow:0 10px 30px rgba(225,29,72,.35)}
-  .hero h1{font-size:30px;letter-spacing:.5px}
-  .hero .tag{color:var(--brand2);font-size:14px;margin-top:4px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
-  .hero p{color:var(--muted);font-size:13px;margin-top:10px}
+  /* topo / logo */
+  .hero{text-align:center;padding:26px 16px 20px;background:radial-gradient(120% 90% at 50% 0%, rgba(225,29,72,.20), transparent 60%);border-bottom:1px solid var(--line)}
+  .hero img.logoimg{max-width:300px;width:80%;margin:0 auto 6px;border-radius:14px}
+  .logo-fallback .logo{width:74px;height:74px;border-radius:20px;background:var(--brand);display:grid;place-items:center;font-size:38px;margin:0 auto 12px;box-shadow:0 10px 30px rgba(225,29,72,.35)}
+  .logo-fallback h1{font-size:30px;letter-spacing:.5px}
+  .logo-fallback .tag{color:var(--brand2);font-size:13px;margin-top:4px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+  .hero p{color:var(--muted);font-size:13px;margin-top:8px}
 
-  /* nav categorias */
-  nav{position:sticky;top:0;z-index:20;background:rgba(13,13,15,.95);backdrop-filter:blur(8px);
-      border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:20;background:rgba(13,13,15,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .nav-inner{max-width:820px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:11px 14px;-webkit-overflow-scrolling:touch}
-  .nav-inner a{flex:none;text-decoration:none;color:var(--txt);background:var(--card);border:1px solid var(--line);
-      padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap}
+  .nav-inner a{flex:none;text-decoration:none;color:var(--txt);background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap}
   .nav-inner a:active{background:var(--brand);border-color:var(--brand)}
 
-  main{max-width:820px;margin:0 auto;padding:18px 16px 60px}
-  .sec{padding-top:26px;scroll-margin-top:64px}
+  main{max-width:820px;margin:0 auto;padding:16px 16px 40px}
+  .sec{padding-top:24px;scroll-margin-top:64px}
   .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
   .sec-head h2{font-size:21px;color:#fff}
   .sec-head .ic{font-size:22px}
   .sec-head .pill{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
 
   /* combos */
-  .combo{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px}
-  .combo .photo{width:100%;aspect-ratio:16/10;object-fit:cover;background:
-      linear-gradient(135deg,#1d1d24,#101015);display:block}
-  .ph-empty{width:100%;aspect-ratio:16/10;background:linear-gradient(135deg,#1d1d24,#101015);
-      display:flex;align-items:center;justify-content:center;color:#3c3c46;font-size:40px}
-  .combo .body{padding:15px 16px 17px}
+  .combos2{display:grid;gap:16px}
+  @media(min-width:640px){.combos2{grid-template-columns:1fr 1fr}}
+  .combo{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .combo .photo{width:100%;aspect-ratio:16/11;object-fit:cover;background:linear-gradient(135deg,#1d1d24,#101015)}
+  .ph-empty{width:100%;aspect-ratio:16/11;background:linear-gradient(135deg,#1d1d24,#101015);display:flex;align-items:center;justify-content:center;color:#3c3c46;font-size:40px}
+  .combo .body{padding:15px 16px 16px;display:flex;flex-direction:column;flex:1}
   .combo .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
   .combo .top h3{font-size:19px}
   .combo .price{font-size:19px;font-weight:800;color:var(--gold);white-space:nowrap}
-  .combo ul{list-style:none;margin-top:11px;display:grid;gap:6px}
-  .combo li{font-size:14px;color:#d6d6dd;padding-left:18px;position:relative}
+  .combo ul{list-style:none;margin-top:11px;display:grid;gap:6px;flex:1}
+  .combo li{font-size:13.5px;color:#d6d6dd;padding-left:18px;position:relative}
   .combo li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--brand)}
-  .combo li small{color:var(--muted);font-size:12.5px}
+  .combo li small{color:var(--muted);font-size:12px}
+  .addbtn{margin-top:13px;width:100%;background:var(--brand);color:#fff;border:none;border-radius:12px;padding:12px;font-size:15px;font-weight:700;cursor:pointer}
+  .addbtn:active{background:var(--brand-d)}
 
-  /* tabelas de preços */
+  /* itens simples (à la carte) */
   .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .price-card . unit{padding:0}
-  .prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+  .prow{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}
   .prow:last-child{border-bottom:none}
-  .prow .pn{font-size:15px}
+  .prow .pn{flex:1;font-size:15px}
   .prow .pv{font-size:15px;font-weight:700;color:var(--gold);white-space:nowrap}
-  .note{font-size:12px;color:var(--muted);margin:8px 2px 0}
+  .miniadd{flex:none;width:34px;height:34px;border-radius:10px;border:none;background:var(--brand);color:#fff;font-size:21px;line-height:1;cursor:pointer}
+  .miniadd:active{background:var(--brand-d)}
 
-  .grid2{display:grid;gap:14px}
-  @media(min-width:620px){ .grid2{grid-template-columns:1fr 1fr} .combos2{grid-template-columns:1fr 1fr} }
-  .combos2{display:grid;gap:16px}
+  /* carrinho fixo */
+  .cartbar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px;background:linear-gradient(transparent,var(--bg) 28%)}
+  .cartbar .inner{max-width:820px;margin:0 auto}
+  .cartbtn{width:100%;background:var(--wa);color:#04210f;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+  .cartbtn:disabled{background:#2a2a31;color:#6b6b75;cursor:default;box-shadow:none}
+  .cartbtn .count{background:rgba(0,0,0,.18);padding:3px 10px;border-radius:999px;font-size:14px}
 
-  footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 16px;border-top:1px solid var(--line);margin-top:20px}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;display:none}
+  .overlay.open{display:block}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--card);border-top-left-radius:20px;border-top-right-radius:20px;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .25s ease}
+  .sheet.open{transform:translateY(0)}
+  .sheet-inner{max-width:820px;margin:0 auto;padding:18px 16px 30px}
+  .sheet h2{font-size:18px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+  .sheet h2 .x{background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
+
+  .line{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .line .ln{flex:1;min-width:0}
+  .line .ln b{display:block;font-size:14px}
+  .line .ln span{font-size:13px;color:var(--muted)}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:18px;cursor:pointer}
+  .qty b{min-width:18px;text-align:center}
+
+  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 5px}
+  input,textarea,select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:11px;font-size:15px;font-family:inherit}
+  textarea{resize:vertical;min-height:52px}
+  .seg{display:flex;gap:8px;margin-top:5px}
+  .seg button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--txt);cursor:pointer;font-size:14px}
+  .seg button.active{background:var(--brand);border-color:var(--brand);color:#fff}
+
+  .totline{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:12px}
+  .totline.grand{font-size:18px;color:#fff;font-weight:800;margin-top:6px}
+  .send{margin-top:16px;width:100%;background:var(--wa);color:#04210f;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer}
+  .empty{text-align:center;color:var(--muted);padding:30px 0}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 16px;border-top:1px solid var(--line);margin-top:10px}
   footer b{color:var(--txt)}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="logo">🍣</div>
-  <h1>Makiro Sushi</h1>
-  <div class="tag">Sushi & Temaki</div>
-  <p>Cardápio digital • Faça seu pedido pelo WhatsApp</p>
+  <img class="logoimg" src="fotos/logo.png" alt="Makiro Sushi"
+       onerror="this.style.display='none';document.getElementById('logoFb').style.display='block'">
+  <div id="logoFb" class="logo-fallback" style="display:none">
+    <div class="logo">🍣</div>
+    <h1>Makiro Sushi</h1>
+    <div class="tag">Sushi Delivery</div>
+  </div>
+  <p>Monte seu pedido e finalize pelo WhatsApp 📲</p>
 </div>
 
 <nav>
@@ -93,189 +127,232 @@
   </div>
 </nav>
 
-<main>
+<main id="app"></main>
 
-  <!-- ===================== COMBOS ===================== -->
-  <section class="sec" id="combos">
-    <div class="sec-head"><span class="ic">🍱</span><h2>Combos</h2><span class="pill">8 opções</span></div>
-    <div class="combos2">
+<footer><b>Makiro Sushi</b> 🍣<br>Cardápio digital — valores sujeitos a alteração.</footer>
 
-      <article class="combo">
-        <img class="photo" src="fotos/combo01.jpg" alt="Combo 01" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 01</h3><span class="price">R$ 58,90</span></div>
-          <ul>
-            <li>10 uramaki skin</li>
-            <li>10 uramaki de kani</li>
-            <li>10 uramaki de salmão grelhado</li>
-            <li>04 shake kani keijo <small>(maionese kiup, quinoa vermelha e tartar de grelhado)</small></li>
-            <li>01 temaki skin</li>
-            <li>01 temaki grelhado</li>
-          </ul>
-        </div>
-      </article>
+<div class="cartbar">
+  <div class="inner">
+    <button class="cartbtn" id="cartbtn" disabled onclick="openCart()">
+      <span>Ver pedido</span><span class="count" id="cartcount">R$ 0,00</span>
+    </button>
+  </div>
+</div>
 
-      <article class="combo">
-        <img class="photo" src="fotos/combo02.jpg" alt="Combo 02" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 02</h3><span class="price">R$ 73,90</span></div>
-          <ul>
-            <li>10 uramaki skin</li>
-            <li>10 uramaki kani</li>
-            <li>10 uramaki salmão grelhado</li>
-            <li>08 carioca skin</li>
-            <li>08 carioca salmão grelhado</li>
-            <li><small>Todos os cariocas finalizados com teriaki e couve crispy</small></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="combo">
-        <img class="photo" src="fotos/combo03.jpg" alt="Combo 03" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 03</h3><span class="price">R$ 74,90</span></div>
-          <ul>
-            <li>10 hot skin</li>
-            <li>10 hot grelhado</li>
-            <li>10 hot camarão</li>
-            <li>08 carioca skin</li>
-            <li>08 carioca salmão grelhado</li>
-            <li><small>Cariocas finalizados com teriaki e couve crispy</small></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="combo">
-        <img class="photo" src="fotos/combo04.jpg" alt="Combo 04" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 04</h3><span class="price">R$ 54,90</span></div>
-          <ul>
-            <li>04 uramaki de salmão grelhado</li>
-            <li>04 uramaki de camarão com cobertura de salmão</li>
-            <li>04 niguiri de skin <small>(maionese kiup, teriaki e cebolinha)</small></li>
-            <li>04 niguiri de kani <small>(maionese kiup e quinoa vermelha)</small></li>
-            <li>06 hossomaki de salmão com cream cheese</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="combo">
-        <img class="photo" src="fotos/combo05.jpg" alt="Combo 05" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 05</h3><span class="price">R$ 63,90</span></div>
-          <ul>
-            <li>04 joy de salmão <small>(sweet chilli, teriaki e couve crispy)</small></li>
-            <li>04 ebi kani keijo</li>
-            <li>04 niguiri de salmão <small>(maionese kiup e quinoa vermelha)</small></li>
-            <li>04 uramaki de salmão grelhado c/ cobertura de salmão <small>(teriaki e gergelim)</small></li>
-            <li>04 uramaki de skin</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="combo">
-        <img class="photo" src="fotos/combo06.jpg" alt="Combo 06" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
-        <div class="body">
-          <div class="top"><h3>Combo 06</h3><span class="price">R$ 56,90</span></div>
-          <ul>
-            <li>05 uramaki de camarão <small>(maionese kiup, ariranha e cebolinha)</small></li>
-            <li>05 uramaki de kani</li>
-            <li>05 uramaki de skin</li>
-            <li>05 hossomaki de salmão</li>
-            <li>05 hot de skin <small>(teriaki, sweet chilli e couve crispy)</small></li>
-            <li>05 hot de salmão grelhado <small>(sweet chilli, teriaki e couve crispy)</small></li>
-          </ul>
-        </div>
-      </article>
-
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-inner">
+    <h2>Seu pedido <button class="x" onclick="closeCart()">&times;</button></h2>
+    <div id="cartlines"></div>
+    <div id="checkout">
+      <label>Tipo de pedido</label>
+      <div class="seg" id="modeSeg">
+        <button data-mode="entrega" class="active" onclick="setMode('entrega')">🛵 Entrega</button>
+        <button data-mode="retirada" onclick="setMode('retirada')">🏃 Retirada</button>
+      </div>
+      <label>Seu nome</label>
+      <input id="cName" placeholder="Nome para o pedido" />
+      <div id="addrBox">
+        <label>Endereço de entrega</label>
+        <input id="cAddr" placeholder="Rua, número, bairro" />
+        <label>Complemento / referência</label>
+        <input id="cRef" placeholder="Apto, casa, ponto de referência" />
+      </div>
+      <label>Forma de pagamento</label>
+      <select id="cPay"><option>Pix</option><option>Cartão (na entrega)</option><option>Dinheiro</option></select>
+      <div id="trocoBox" style="display:none">
+        <label>Troco para quanto?</label>
+        <input id="cTroco" placeholder="Ex: R$ 100" />
+      </div>
+      <label>Observações</label>
+      <textarea id="cObs" placeholder="Ex: caprichar no shoyu, sem cebolinha..."></textarea>
+      <div class="totline grand"><span>Total</span><span id="tGrand">R$ 0,00</span></div>
+      <button class="send" onclick="sendWhats()">📲 Enviar pedido no WhatsApp</button>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ===================== TEMAKIS ===================== -->
-  <section class="sec" id="temakis">
-    <div class="sec-head"><span class="ic">🌯</span><h2>Temakis</h2></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 18,90</span></div>
-      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 21,90</span></div>
-      <div class="prow"><span class="pn">Kani</span><span class="pv">R$ 19,90</span></div>
-      <div class="prow"><span class="pn">Camarão crocante</span><span class="pv">R$ 25,90</span></div>
+<script>
+/* ====== CONFIG ====== */
+const WHATS = "5581987158615"; // WhatsApp do Makiro Sushi
+
+/* ====== CARDÁPIO ====== */
+const COMBOS = [
+  { id:"c01", nome:"Combo 01", preco:58.90, img:"fotos/combo01.jpg", itens:[
+    "10 uramaki skin","10 uramaki de kani","10 uramaki de salmão grelhado",
+    ["04 shake kani keijo","(maionese kiup, quinoa vermelha e tartar de grelhado)"],
+    "01 temaki skin","01 temaki grelhado"]},
+  { id:"c02", nome:"Combo 02", preco:73.90, img:"fotos/combo02.jpg", itens:[
+    "10 uramaki skin","10 uramaki kani","10 uramaki salmão grelhado",
+    "08 carioca skin","08 carioca salmão grelhado",
+    [null,"Todos os cariocas finalizados com teriaki e couve crispy"]]},
+  { id:"c03", nome:"Combo 03", preco:74.90, img:"fotos/combo03.jpg", itens:[
+    "10 hot skin","10 hot grelhado","10 hot camarão",
+    "08 carioca skin","08 carioca salmão grelhado",
+    [null,"Cariocas finalizados com teriaki e couve crispy"]]},
+  { id:"c04", nome:"Combo 04", preco:54.90, img:"fotos/combo04.jpg", itens:[
+    "04 uramaki de salmão grelhado","04 uramaki de camarão com cobertura de salmão",
+    ["04 niguiri de skin","(maionese kiup, teriaki e cebolinha)"],
+    ["04 niguiri de kani","(maionese kiup e quinoa vermelha)"],
+    "06 hossomaki de salmão com cream cheese"]},
+  { id:"c05", nome:"Combo 05", preco:63.90, img:"fotos/combo05.jpg", itens:[
+    ["04 joy de salmão","(sweet chilli, teriaki e couve crispy)"],
+    "04 ebi kani keijo",
+    ["04 niguiri de salmão","(maionese kiup e quinoa vermelha)"],
+    ["04 uramaki de salmão grelhado c/ cobertura de salmão","(teriaki e gergelim)"],
+    "04 uramaki de skin"]},
+  { id:"c06", nome:"Combo 06", preco:56.90, img:"fotos/combo06.jpg", itens:[
+    ["05 uramaki de camarão","(maionese kiup, ariranha e cebolinha)"],
+    "05 uramaki de kani","05 uramaki de skin","05 hossomaki de salmão",
+    ["05 hot de skin","(teriaki, sweet chilli e couve crispy)"],
+    ["05 hot de salmão grelhado","(sweet chilli, teriaki e couve crispy)"]]},
+];
+
+const CATS = [
+  { id:"temakis", ic:"🌯", nome:"Temakis", itens:[
+    ["Temaki Skin",18.90],["Temaki Salmão Grelhado",21.90],["Temaki Kani",19.90],["Temaki Camarão crocante",25.90]]},
+  { id:"niguiris", ic:"🍙", nome:"Niguiris", sub:"porção 6 un", itens:[
+    ["Niguiri Skin (6un)",16.90],["Niguiri Salmão (6un)",28.90],["Niguiri Kani (6un)",18.90]]},
+  { id:"uramakis", ic:"🍣", nome:"Uramakis", sub:"porção 10 un", itens:[
+    ["Uramaki Camarão (10un)",21.90],["Uramaki Skin/Kani (10un)",18.90],["Uramaki Salmão Grelhado (10un)",20.90]]},
+  { id:"hossomaki", ic:"🍥", nome:"Hossomaki", sub:"porção 10 un", itens:[
+    ["Hossomaki Salmão (10un)",22.90],["Hossomaki Camarão (10un)",21.90]]},
+  { id:"hot", ic:"🔥", nome:"Hot", sub:"porção 10 un", itens:[
+    ["Hot Skin (10un)",16.90],["Hot Salmão Grelhado (10un)",17.90],["Hot Camarão (10un)",19.90]]},
+  { id:"cariocas", ic:"🍤", nome:"Cariocas", sub:"porção 10 un", itens:[
+    ["Carioca Skin (10un)",16.90],["Carioca Salmão Grelhado (10un)",17.90],["Carioca Camarão (10un)",19.90]]},
+  { id:"bebidas", ic:"🥤", nome:"Bebidas", itens:[
+    ["Coca lata",8.00],["Coca lata Zero",8.00],["Coca Cola Zero 1L",13.00],["Coca 1L",13.00],
+    ["Guaraná lata",7.00],["Guaraná Antarctica Zero",7.00],["Guaraná 1L",12.50],
+    ["H2O Limoneto 500ml",8.50],["H2O Limão 500ml",8.50],
+    ["Água sem gás Indaiá",4.50],["Água com gás Indaiá",5.00],["Cerveja Heineken Lata",11.00]]},
+];
+
+/* ====== RENDER ====== */
+const brl = n => "R$ " + n.toFixed(2).replace(".", ",");
+const app = document.getElementById("app");
+
+// combos
+let html = `<section class="sec" id="combos">
+  <div class="sec-head"><span class="ic">🍱</span><h2>Combos</h2><span class="pill">${COMBOS.length} opções</span></div>
+  <div class="combos2">`;
+COMBOS.forEach(c=>{
+  html += `<article class="combo">
+    <img class="photo" src="${c.img}" alt="${c.nome}" loading="lazy"
+      onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+    <div class="body">
+      <div class="top"><h3>${c.nome}</h3><span class="price">${brl(c.preco)}</span></div>
+      <ul>` + c.itens.map(it=>{
+        const main = Array.isArray(it)?it[0]:it;
+        const note = Array.isArray(it)?it[1]:null;
+        if(main===null) return `<li style="list-style:none;padding-left:0"><small>${note}</small></li>`;
+        return `<li>${main}${note?` <small>${note}</small>`:""}</li>`;
+      }).join("") + `</ul>
+      <button class="addbtn" onclick="addItem('${c.id}','${c.nome}',${c.preco})">Adicionar ao pedido</button>
     </div>
-  </section>
+  </article>`;
+});
+html += `</div></section>`;
 
-  <!-- ===================== NIGUIRIS ===================== -->
-  <section class="sec" id="niguiris">
-    <div class="sec-head"><span class="ic">🍙</span><h2>Niguiris</h2><span class="pill">porção 6 un</span></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
-      <div class="prow"><span class="pn">Salmão</span><span class="pv">R$ 28,90</span></div>
-      <div class="prow"><span class="pn">Kani</span><span class="pv">R$ 18,90</span></div>
-    </div>
-  </section>
+// categorias simples
+CATS.forEach(cat=>{
+  html += `<section class="sec" id="${cat.id}">
+    <div class="sec-head"><span class="ic">${cat.ic}</span><h2>${cat.nome}</h2>${cat.sub?`<span class="pill">${cat.sub}</span>`:""}</div>
+    <div class="price-card">`;
+  cat.itens.forEach((it,i)=>{
+    const id = cat.id+"_"+i;
+    html += `<div class="prow">
+      <span class="pn">${it[0]}</span>
+      <span class="pv">${brl(it[1])}</span>
+      <button class="miniadd" onclick="addItem('${id}','${it[0].replace(/'/g,"\\'")}',${it[1]})">+</button>
+    </div>`;
+  });
+  html += `</div></section>`;
+});
+app.innerHTML = html;
 
-  <!-- ===================== URAMAKIS ===================== -->
-  <section class="sec" id="uramakis">
-    <div class="sec-head"><span class="ic">🍣</span><h2>Uramakis</h2><span class="pill">porção 10 un</span></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 21,90</span></div>
-      <div class="prow"><span class="pn">Skin / Kani</span><span class="pv">R$ 18,90</span></div>
-      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 20,90</span></div>
-    </div>
-  </section>
+/* ====== CARRINHO ====== */
+const cart = {};
+let mode = "entrega";
 
-  <!-- ===================== HOSSOMAKI ===================== -->
-  <section class="sec" id="hossomaki">
-    <div class="sec-head"><span class="ic">🍥</span><h2>Hossomaki</h2><span class="pill">porção 10 un</span></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Salmão</span><span class="pv">R$ 22,90</span></div>
-      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 21,90</span></div>
-    </div>
-  </section>
+function addItem(id,nome,preco){
+  if(!cart[id]) cart[id]={nome,preco,qtd:0};
+  cart[id].qtd++;
+  flash();
+  renderCart();
+}
+function changeQty(id,d){
+  if(!cart[id])return;
+  cart[id].qtd+=d;
+  if(cart[id].qtd<=0) delete cart[id];
+  renderCart();
+}
+const subtotal=()=>Object.values(cart).reduce((s,i)=>s+i.preco*i.qtd,0);
+const totalCount=()=>Object.values(cart).reduce((s,i)=>s+i.qtd,0);
 
-  <!-- ===================== HOT ===================== -->
-  <section class="sec" id="hot">
-    <div class="sec-head"><span class="ic">🔥</span><h2>Hot</h2><span class="pill">porção 10 un</span></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
-      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 17,90</span></div>
-      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 19,90</span></div>
-    </div>
-  </section>
+function flash(){
+  const b=document.getElementById("cartbtn");
+  b.style.transform="scale(1.03)";
+  setTimeout(()=>b.style.transform="",150);
+}
 
-  <!-- ===================== CARIOCAS ===================== -->
-  <section class="sec" id="cariocas">
-    <div class="sec-head"><span class="ic">🍤</span><h2>Cariocas</h2><span class="pill">porção 10 un</span></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
-      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 17,90</span></div>
-      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 19,90</span></div>
-    </div>
-  </section>
+function renderCart(){
+  const sub=subtotal(), cnt=totalCount();
+  const btn=document.getElementById("cartbtn");
+  btn.disabled=cnt===0;
+  document.getElementById("cartcount").textContent = cnt>0?`${cnt} item(s) • ${brl(sub)}`:brl(0);
+  const wrap=document.getElementById("cartlines");
+  const co=document.getElementById("checkout");
+  if(cnt===0){wrap.innerHTML=`<div class="empty">Seu carrinho está vazio 🛒</div>`;co.style.display="none";return;}
+  co.style.display="block";
+  wrap.innerHTML="";
+  Object.entries(cart).forEach(([id,i])=>{
+    const row=document.createElement("div");
+    row.className="line";
+    row.innerHTML=`<div class="ln"><b>${i.nome}</b><span>${brl(i.preco)}</span></div>
+      <div class="qty"><button onclick="changeQty('${id}',-1)">−</button><b>${i.qtd}</b><button onclick="changeQty('${id}',1)">+</button></div>`;
+    wrap.appendChild(row);
+  });
+  document.getElementById("tGrand").textContent=brl(sub);
+}
 
-  <!-- ===================== BEBIDAS ===================== -->
-  <section class="sec" id="bebidas">
-    <div class="sec-head"><span class="ic">🥤</span><h2>Bebidas</h2></div>
-    <div class="price-card">
-      <div class="prow"><span class="pn">Coca lata</span><span class="pv">R$ 8,00</span></div>
-      <div class="prow"><span class="pn">Coca lata Zero</span><span class="pv">R$ 8,00</span></div>
-      <div class="prow"><span class="pn">Coca Cola Zero 1L</span><span class="pv">R$ 13,00</span></div>
-      <div class="prow"><span class="pn">Coca 1L</span><span class="pv">R$ 13,00</span></div>
-      <div class="prow"><span class="pn">Guaraná lata</span><span class="pv">R$ 7,00</span></div>
-      <div class="prow"><span class="pn">Guaraná Antarctica Zero</span><span class="pv">R$ 7,00</span></div>
-      <div class="prow"><span class="pn">Guaraná 1L</span><span class="pv">R$ 12,50</span></div>
-      <div class="prow"><span class="pn">H2O Limoneto 500ml</span><span class="pv">R$ 8,50</span></div>
-      <div class="prow"><span class="pn">H2O Limão 500ml</span><span class="pv">R$ 8,50</span></div>
-      <div class="prow"><span class="pn">Água sem gás Indaiá</span><span class="pv">R$ 4,50</span></div>
-      <div class="prow"><span class="pn">Água com gás Indaiá</span><span class="pv">R$ 5,00</span></div>
-      <div class="prow"><span class="pn">Cerveja Heineken Lata</span><span class="pv">R$ 11,00</span></div>
-    </div>
-  </section>
+function setMode(m){
+  mode=m;
+  document.querySelectorAll("#modeSeg button").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));
+  document.getElementById("addrBox").style.display = m==="entrega"?"block":"none";
+}
+document.getElementById("cPay").addEventListener("change",e=>{
+  document.getElementById("trocoBox").style.display = e.target.value==="Dinheiro"?"block":"none";
+});
+function openCart(){document.getElementById("overlay").classList.add("open");document.getElementById("sheet").classList.add("open");}
+function closeCart(){document.getElementById("overlay").classList.remove("open");document.getElementById("sheet").classList.remove("open");}
 
-</main>
+function sendWhats(){
+  if(totalCount()===0){alert("Adicione itens ao pedido.");return;}
+  const nome=document.getElementById("cName").value.trim();
+  if(!nome){alert("Informe seu nome.");return;}
+  let msg=`*NOVO PEDIDO — Makiro Sushi* 🍣\n\n`;
+  msg+=`*Cliente:* ${nome}\n`;
+  msg+=`*Tipo:* ${mode==="entrega"?"Entrega 🛵":"Retirada 🏃"}\n`;
+  if(mode==="entrega"){
+    const addr=document.getElementById("cAddr").value.trim();
+    const ref=document.getElementById("cRef").value.trim();
+    if(!addr){alert("Informe o endereço de entrega.");return;}
+    msg+=`*Endereço:* ${addr}\n`;
+    if(ref) msg+=`*Referência:* ${ref}\n`;
+  }
+  msg+=`\n*Itens:*\n`;
+  Object.values(cart).forEach(i=>{msg+=`• ${i.qtd}x ${i.nome} — ${brl(i.preco*i.qtd)}\n`;});
+  msg+=`\n*TOTAL: ${brl(subtotal())}*\n`;
+  const pay=document.getElementById("cPay").value;
+  msg+=`\n*Pagamento:* ${pay}\n`;
+  if(pay==="Dinheiro"){const tr=document.getElementById("cTroco").value.trim();if(tr)msg+=`*Troco para:* ${tr}\n`;}
+  const obs=document.getElementById("cObs").value.trim();
+  if(obs) msg+=`\n*Obs:* ${obs}\n`;
+  window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`,"_blank");
+}
 
-<footer>
-  <b>Makiro Sushi</b> 🍣<br>
-  Cardápio digital — valores sujeitos a alteração.
-</footer>
-
+renderCart();
+</script>
 </body>
 </html>
