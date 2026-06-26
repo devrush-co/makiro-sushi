@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Makiro Sushi — Cardápio</title>
+<style>
+  :root{
+    --bg:#0d0d0f; --card:#16161b; --line:#26262f;
+    --txt:#f5f5f7; --muted:#9a9aa6;
+    --brand:#e11d48; --brand2:#fb7185; --gold:#f5c451;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5}
+  img{display:block;max-width:100%}
+
+  /* topo */
+  .hero{text-align:center;padding:34px 16px 22px;background:
+      radial-gradient(120% 90% at 50% 0%, rgba(225,29,72,.22), transparent 60%);
+      border-bottom:1px solid var(--line)}
+  .hero .logo{width:74px;height:74px;border-radius:20px;background:var(--brand);
+      display:grid;place-items:center;font-size:38px;margin:0 auto 12px;box-shadow:0 10px 30px rgba(225,29,72,.35)}
+  .hero h1{font-size:30px;letter-spacing:.5px}
+  .hero .tag{color:var(--brand2);font-size:14px;margin-top:4px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+  .hero p{color:var(--muted);font-size:13px;margin-top:10px}
+
+  /* nav categorias */
+  nav{position:sticky;top:0;z-index:20;background:rgba(13,13,15,.95);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:820px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:11px 14px;-webkit-overflow-scrolling:touch}
+  .nav-inner a{flex:none;text-decoration:none;color:var(--txt);background:var(--card);border:1px solid var(--line);
+      padding:8px 14px;border-radius:999px;font-size:13.5px;white-space:nowrap}
+  .nav-inner a:active{background:var(--brand);border-color:var(--brand)}
+
+  main{max-width:820px;margin:0 auto;padding:18px 16px 60px}
+  .sec{padding-top:26px;scroll-margin-top:64px}
+  .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .sec-head h2{font-size:21px;color:#fff}
+  .sec-head .ic{font-size:22px}
+  .sec-head .pill{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+
+  /* combos */
+  .combo{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px}
+  .combo .photo{width:100%;aspect-ratio:16/10;object-fit:cover;background:
+      linear-gradient(135deg,#1d1d24,#101015);display:block}
+  .ph-empty{width:100%;aspect-ratio:16/10;background:linear-gradient(135deg,#1d1d24,#101015);
+      display:flex;align-items:center;justify-content:center;color:#3c3c46;font-size:40px}
+  .combo .body{padding:15px 16px 17px}
+  .combo .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .combo .top h3{font-size:19px}
+  .combo .price{font-size:19px;font-weight:800;color:var(--gold);white-space:nowrap}
+  .combo ul{list-style:none;margin-top:11px;display:grid;gap:6px}
+  .combo li{font-size:14px;color:#d6d6dd;padding-left:18px;position:relative}
+  .combo li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .combo li small{color:var(--muted);font-size:12.5px}
+
+  /* tabelas de preços */
+  .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .price-card . unit{padding:0}
+  .prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+  .prow:last-child{border-bottom:none}
+  .prow .pn{font-size:15px}
+  .prow .pv{font-size:15px;font-weight:700;color:var(--gold);white-space:nowrap}
+  .note{font-size:12px;color:var(--muted);margin:8px 2px 0}
+
+  .grid2{display:grid;gap:14px}
+  @media(min-width:620px){ .grid2{grid-template-columns:1fr 1fr} .combos2{grid-template-columns:1fr 1fr} }
+  .combos2{display:grid;gap:16px}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 16px;border-top:1px solid var(--line);margin-top:20px}
+  footer b{color:var(--txt)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">🍣</div>
+  <h1>Makiro Sushi</h1>
+  <div class="tag">Sushi & Temaki</div>
+  <p>Cardápio digital • Faça seu pedido pelo WhatsApp</p>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#combos">Combos</a>
+    <a href="#temakis">Temakis</a>
+    <a href="#niguiris">Niguiris</a>
+    <a href="#uramakis">Uramakis</a>
+    <a href="#hossomaki">Hossomaki</a>
+    <a href="#hot">Hot</a>
+    <a href="#cariocas">Cariocas</a>
+    <a href="#bebidas">Bebidas</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===================== COMBOS ===================== -->
+  <section class="sec" id="combos">
+    <div class="sec-head"><span class="ic">🍱</span><h2>Combos</h2><span class="pill">8 opções</span></div>
+    <div class="combos2">
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo01.jpg" alt="Combo 01" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 01</h3><span class="price">R$ 58,90</span></div>
+          <ul>
+            <li>10 uramaki skin</li>
+            <li>10 uramaki de kani</li>
+            <li>10 uramaki de salmão grelhado</li>
+            <li>04 shake kani keijo <small>(maionese kiup, quinoa vermelha e tartar de grelhado)</small></li>
+            <li>01 temaki skin</li>
+            <li>01 temaki grelhado</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo02.jpg" alt="Combo 02" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 02</h3><span class="price">R$ 73,90</span></div>
+          <ul>
+            <li>10 uramaki skin</li>
+            <li>10 uramaki kani</li>
+            <li>10 uramaki salmão grelhado</li>
+            <li>08 carioca skin</li>
+            <li>08 carioca salmão grelhado</li>
+            <li><small>Todos os cariocas finalizados com teriaki e couve crispy</small></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo03.jpg" alt="Combo 03" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 03</h3><span class="price">R$ 74,90</span></div>
+          <ul>
+            <li>10 hot skin</li>
+            <li>10 hot grelhado</li>
+            <li>10 hot camarão</li>
+            <li>08 carioca skin</li>
+            <li>08 carioca salmão grelhado</li>
+            <li><small>Cariocas finalizados com teriaki e couve crispy</small></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo04.jpg" alt="Combo 04" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 04</h3><span class="price">R$ 54,90</span></div>
+          <ul>
+            <li>04 uramaki de salmão grelhado</li>
+            <li>04 uramaki de camarão com cobertura de salmão</li>
+            <li>04 niguiri de skin <small>(maionese kiup, teriaki e cebolinha)</small></li>
+            <li>04 niguiri de kani <small>(maionese kiup e quinoa vermelha)</small></li>
+            <li>06 hossomaki de salmão com cream cheese</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo05.jpg" alt="Combo 05" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 05</h3><span class="price">R$ 63,90</span></div>
+          <ul>
+            <li>04 joy de salmão <small>(sweet chilli, teriaki e couve crispy)</small></li>
+            <li>04 ebi kani keijo</li>
+            <li>04 niguiri de salmão <small>(maionese kiup e quinoa vermelha)</small></li>
+            <li>04 uramaki de salmão grelhado c/ cobertura de salmão <small>(teriaki e gergelim)</small></li>
+            <li>04 uramaki de skin</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="combo">
+        <img class="photo" src="fotos/combo06.jpg" alt="Combo 06" onerror="this.outerHTML='<div class=&quot;ph-empty&quot;>🍣</div>'">
+        <div class="body">
+          <div class="top"><h3>Combo 06</h3><span class="price">R$ 56,90</span></div>
+          <ul>
+            <li>05 uramaki de camarão <small>(maionese kiup, ariranha e cebolinha)</small></li>
+            <li>05 uramaki de kani</li>
+            <li>05 uramaki de skin</li>
+            <li>05 hossomaki de salmão</li>
+            <li>05 hot de skin <small>(teriaki, sweet chilli e couve crispy)</small></li>
+            <li>05 hot de salmão grelhado <small>(sweet chilli, teriaki e couve crispy)</small></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== TEMAKIS ===================== -->
+  <section class="sec" id="temakis">
+    <div class="sec-head"><span class="ic">🌯</span><h2>Temakis</h2></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 18,90</span></div>
+      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 21,90</span></div>
+      <div class="prow"><span class="pn">Kani</span><span class="pv">R$ 19,90</span></div>
+      <div class="prow"><span class="pn">Camarão crocante</span><span class="pv">R$ 25,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== NIGUIRIS ===================== -->
+  <section class="sec" id="niguiris">
+    <div class="sec-head"><span class="ic">🍙</span><h2>Niguiris</h2><span class="pill">porção 6 un</span></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
+      <div class="prow"><span class="pn">Salmão</span><span class="pv">R$ 28,90</span></div>
+      <div class="prow"><span class="pn">Kani</span><span class="pv">R$ 18,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== URAMAKIS ===================== -->
+  <section class="sec" id="uramakis">
+    <div class="sec-head"><span class="ic">🍣</span><h2>Uramakis</h2><span class="pill">porção 10 un</span></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 21,90</span></div>
+      <div class="prow"><span class="pn">Skin / Kani</span><span class="pv">R$ 18,90</span></div>
+      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 20,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== HOSSOMAKI ===================== -->
+  <section class="sec" id="hossomaki">
+    <div class="sec-head"><span class="ic">🍥</span><h2>Hossomaki</h2><span class="pill">porção 10 un</span></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Salmão</span><span class="pv">R$ 22,90</span></div>
+      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 21,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== HOT ===================== -->
+  <section class="sec" id="hot">
+    <div class="sec-head"><span class="ic">🔥</span><h2>Hot</h2><span class="pill">porção 10 un</span></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
+      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 17,90</span></div>
+      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 19,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== CARIOCAS ===================== -->
+  <section class="sec" id="cariocas">
+    <div class="sec-head"><span class="ic">🍤</span><h2>Cariocas</h2><span class="pill">porção 10 un</span></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Skin</span><span class="pv">R$ 16,90</span></div>
+      <div class="prow"><span class="pn">Salmão Grelhado</span><span class="pv">R$ 17,90</span></div>
+      <div class="prow"><span class="pn">Camarão</span><span class="pv">R$ 19,90</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== BEBIDAS ===================== -->
+  <section class="sec" id="bebidas">
+    <div class="sec-head"><span class="ic">🥤</span><h2>Bebidas</h2></div>
+    <div class="price-card">
+      <div class="prow"><span class="pn">Coca lata</span><span class="pv">R$ 8,00</span></div>
+      <div class="prow"><span class="pn">Coca lata Zero</span><span class="pv">R$ 8,00</span></div>
+      <div class="prow"><span class="pn">Coca Cola Zero 1L</span><span class="pv">R$ 13,00</span></div>
+      <div class="prow"><span class="pn">Coca 1L</span><span class="pv">R$ 13,00</span></div>
+      <div class="prow"><span class="pn">Guaraná lata</span><span class="pv">R$ 7,00</span></div>
+      <div class="prow"><span class="pn">Guaraná Antarctica Zero</span><span class="pv">R$ 7,00</span></div>
+      <div class="prow"><span class="pn">Guaraná 1L</span><span class="pv">R$ 12,50</span></div>
+      <div class="prow"><span class="pn">H2O Limoneto 500ml</span><span class="pv">R$ 8,50</span></div>
+      <div class="prow"><span class="pn">H2O Limão 500ml</span><span class="pv">R$ 8,50</span></div>
+      <div class="prow"><span class="pn">Água sem gás Indaiá</span><span class="pv">R$ 4,50</span></div>
+      <div class="prow"><span class="pn">Água com gás Indaiá</span><span class="pv">R$ 5,00</span></div>
+      <div class="prow"><span class="pn">Cerveja Heineken Lata</span><span class="pv">R$ 11,00</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <b>Makiro Sushi</b> 🍣<br>
+  Cardápio digital — valores sujeitos a alteração.
+</footer>
+
+</body>
+</html>
